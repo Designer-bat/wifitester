@@ -54,7 +54,7 @@ The AI can predict:
 
 ---
 
-# Recommended Tech Stack
+# Tech Stack
 
 # Frontend Development
 
@@ -167,9 +167,7 @@ Recommended:
 
 ---
 
-# Database
-
-## Recommended Database
+##Database
 
 ### Local Database
 Preferred:
@@ -241,64 +239,6 @@ Reason:
 - Background optimization
 
 ---
-
-# Suggested Architecture
-
-Frontend:
-React + Tauri
-
-Backend:
-Rust Services
-
-AI Engine:
-Python Microservice
-
-Database:
-SQLite
-
-Charts:
-Recharts
-
----
-
-# Recommended Development Phases
-
-## Phase 1
-- Basic UI
-- Manual speed test
-- Ping testing
-- Server list
-
-## Phase 2
-- Auto server selection
-- Real-time monitoring
-- History analytics
-
-## Phase 3
-- AI recommendation engine
-- Smart optimization
-- Auto switching
-
-## Phase 4
-- Advanced analytics
-- Gaming mode
-- Streaming mode
-- Notifications
-
----
-
-# Future Features
-
-- VPN integration
-- DNS optimizer
-- Packet prioritization
-- ISP analytics
-- Router monitoring
-- Mobile companion app
-- Cloud sync
-
----
-
 # Development Instructions for AI Agent
 
 ## Coding Standards
@@ -327,7 +267,7 @@ Recharts
 
 ---
 
-# Recommended Folder Structure
+# Folder Structure
 
 /project-root
 /frontend
@@ -339,7 +279,7 @@ Recharts
 
 ---
 
-# Recommended NPM Packages
+# NPM Packages
 
 ## Frontend
 - react
@@ -363,7 +303,7 @@ OR
 
 ---
 
-# Recommended Git Workflow
+# Git Workflow
 
 - main branch
 - dev branch
