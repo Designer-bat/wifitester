@@ -1,0 +1,21 @@
+{
+    "name": "ai-wifi-optimizer",
+    "version": "1.0.0",
+    "description": "AI-powered WiFi and network latency optimizer for Windows",
+    "main": "backend/main.js",
+    "scripts": {
+        "frontend:dev": "npm run dev --workspace=frontend",
+        "frontend:build": "npm run build --workspace=frontend",
+        "electron:dev": "electron .",
+        "dev": "concurrently -k \"npm run frontend:dev\" \"npm run electron:dev\"",
+        "build": "npm run frontend:build && electron-builder"
+    },
+    "workspaces": [
+        "frontend"
+    ],
+    "devDependencies": {
+        "concurrently": "^9.1.0",
+        "electron": "^33.2.0",
+        "electron-builder": "^25.1.8"
+    }
+}
