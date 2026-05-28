@@ -43,7 +43,7 @@ export const SpeedTest: React.FC = () => {
             cx="160"
             cy="160"
             r="140"
-            stroke="#1e293b"
+            stroke="#e2e8f0"
             strokeWidth="8"
             fill="transparent"
             className="transition-all duration-300"
@@ -52,7 +52,7 @@ export const SpeedTest: React.FC = () => {
             cx="160"
             cy="160"
             r="140"
-            stroke={testPhase === 'complete' ? '#10b981' : '#06b6d4'}
+            stroke={testPhase === 'complete' ? '#22C55E' : '#7B2CBF'}
             strokeWidth="10"
             fill="transparent"
             strokeDasharray={2 * Math.PI * 140}
@@ -63,25 +63,25 @@ export const SpeedTest: React.FC = () => {
         </svg>
 
         {/* Central Card Info */}
-        <div className="w-64 h-64 bg-[#0d1220]/80 border border-[#1e293b] rounded-full shadow-[0_0_50px_rgba(6,182,212,0.05)] flex flex-col items-center justify-center text-center p-6 z-10 backdrop-blur-md">
+        <div className="w-64 h-64 bg-background-card border border-slate-200 rounded-full shadow-lg flex flex-col items-center justify-center text-center p-6 z-10">
           {isTesting ? (
-            <div className="p-2 bg-cyan-500/10 rounded-full animate-bounce mb-2">
-              <Zap className="w-5 h-5 text-cyan-400" />
+            <div className="p-2 bg-primary-lavender rounded-full animate-bounce mb-2">
+              <Zap className="w-5 h-5 text-primary-purple" />
             </div>
           ) : (
-            <div className="p-2 bg-emerald-500/10 rounded-full mb-2">
-              <Wifi className="w-5 h-5 text-emerald-400" />
+            <div className="p-2 bg-primary-lavender rounded-full mb-2">
+              <Wifi className="w-5 h-5 text-primary-purple" />
             </div>
           )}
-          <span className="text-xs text-slate-500 font-semibold uppercase tracking-widest">{getPhaseLabel()}</span>
-          <h2 className="text-4xl font-extrabold text-slate-100 tracking-tighter my-2 font-mono">
+          <span className="text-xs text-slate-600 font-semibold uppercase tracking-widest">{getPhaseLabel()}</span>
+          <h2 className="text-4xl font-extrabold text-slate-900 tracking-tighter my-2 font-mono">
             {getDisplaySpeed()}
           </h2>
-          <span className="text-[10px] text-slate-400 font-mono">
+          <span className="text-[10px] text-slate-600 font-mono">
             {activeServer ? activeServer.name : 'Unknown Host'}
           </span>
           {isTesting && (
-            <span className="text-xs font-bold text-cyan-400 mt-2 font-mono">
+            <span className="text-xs font-bold text-primary-purple mt-2 font-mono">
               {testProgress}%
             </span>
           )}
@@ -91,31 +91,31 @@ export const SpeedTest: React.FC = () => {
       {/* Speed Metrics Summary */}
       <div className="w-full max-w-2xl grid grid-cols-3 gap-6">
         {/* Latency metric */}
-        <div className="bg-[#0d1220]/50 border border-[#1e293b] rounded-2xl p-5 flex flex-col items-center text-center">
-          <span className="text-xs font-medium text-slate-500 uppercase flex items-center gap-1.5">
-            <Zap className="w-3.5 h-3.5 text-cyan-400" /> Latency
+        <div className="bg-background-card border border-slate-200 rounded-2xl p-5 flex flex-col items-center text-center shadow-sm">
+          <span className="text-xs font-medium text-slate-600 uppercase flex items-center gap-1.5">
+            <Zap className="w-3.5 h-3.5 text-primary-purple" /> Latency
           </span>
-          <span className="text-2xl font-bold tracking-tight text-cyan-400 font-mono mt-1">
+          <span className="text-2xl font-bold tracking-tight text-primary-purple font-mono mt-1">
             {currentPing} <span className="text-xs text-slate-500 font-sans">ms</span>
           </span>
         </div>
 
         {/* Download metric */}
-        <div className="bg-[#0d1220]/50 border border-[#1e293b] rounded-2xl p-5 flex flex-col items-center text-center">
-          <span className="text-xs font-medium text-slate-500 uppercase flex items-center gap-1.5">
-            <ArrowDown className="w-3.5 h-3.5 text-purple-400" /> Download
+        <div className="bg-background-card border border-slate-200 rounded-2xl p-5 flex flex-col items-center text-center shadow-sm">
+          <span className="text-xs font-medium text-slate-600 uppercase flex items-center gap-1.5">
+            <ArrowDown className="w-3.5 h-3.5 text-primary-purple" /> Download
           </span>
-          <span className="text-2xl font-bold tracking-tight text-purple-400 font-mono mt-1">
+          <span className="text-2xl font-bold tracking-tight text-primary-purple font-mono mt-1">
             {downloadSpeed} <span className="text-xs text-slate-500 font-sans">Mbps</span>
           </span>
         </div>
 
         {/* Upload metric */}
-        <div className="bg-[#0d1220]/50 border border-[#1e293b] rounded-2xl p-5 flex flex-col items-center text-center">
-          <span className="text-xs font-medium text-slate-500 uppercase flex items-center gap-1.5">
-            <ArrowUp className="w-3.5 h-3.5 text-emerald-400" /> Upload
+        <div className="bg-background-card border border-slate-200 rounded-2xl p-5 flex flex-col items-center text-center shadow-sm">
+          <span className="text-xs font-medium text-slate-600 uppercase flex items-center gap-1.5">
+            <ArrowUp className="w-3.5 h-3.5 text-primary-purple" /> Upload
           </span>
-          <span className="text-2xl font-bold tracking-tight text-emerald-400 font-mono mt-1">
+          <span className="text-2xl font-bold tracking-tight text-primary-purple font-mono mt-1">
             {uploadSpeed} <span className="text-xs text-slate-500 font-sans">Mbps</span>
           </span>
         </div>
@@ -128,25 +128,25 @@ export const SpeedTest: React.FC = () => {
           disabled={isTesting}
           className={`px-8 py-4 rounded-full font-bold text-sm flex items-center gap-3 transition-all duration-300 ${
             isTesting
-              ? 'bg-[#1e293b] text-slate-500 cursor-not-allowed border border-transparent'
+              ? 'bg-slate-200 text-slate-500 cursor-not-allowed border border-transparent'
               : testPhase === 'complete'
-              ? 'bg-emerald-500 hover:bg-emerald-600 text-[#0b0f19] hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] shadow-lg'
-              : 'bg-cyan-500 hover:bg-cyan-600 text-[#0b0f19] hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] shadow-lg'
+              ? 'bg-status-success hover:bg-status-success/90 text-white hover:shadow-lg shadow-md'
+              : 'bg-gradient-to-r from-primary-purple to-primary-gradient hover:from-primary-gradient hover:to-primary-deep text-white hover:shadow-lg shadow-md'
           }`}
         >
           {isTesting ? (
             <>
-              <span className="w-4 h-4 rounded-full border-2 border-slate-500 border-t-slate-300 animate-spin" />
+              <span className="w-4 h-4 rounded-full border-2 border-slate-400 border-t-slate-600 animate-spin" />
               Running diagnostics
             </>
           ) : testPhase === 'complete' ? (
             <>
-              <RotateCcw className="w-4 h-4 text-[#0b0f19]" />
+              <RotateCcw className="w-4 h-4" />
               Run test again
             </>
           ) : (
             <>
-              <Play className="w-4 h-4 text-[#0b0f19] fill-current" />
+              <Play className="w-4 h-4 fill-current" />
               Start manual speed test
             </>
           )}

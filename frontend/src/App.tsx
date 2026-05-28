@@ -41,13 +41,13 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="flex w-screen h-screen bg-[#0b0f19] text-slate-100 overflow-hidden font-sans">
+    <div className="flex w-screen h-screen bg-background-light text-slate-800 overflow-hidden font-sans">
       <Sidebar />
-      <main className="flex-1 flex flex-col min-w-0 bg-[#0b0f19] relative">
+      <main className="flex-1 flex flex-col min-w-0 bg-background-light relative">
         {/* Background glow effects */}
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-500/5 blur-[120px] rounded-full pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-purple-500/3 blur-[100px] rounded-full pointer-events-none" />
-        
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary-lavender/30 blur-[120px] rounded-full pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary-lavender/20 blur-[100px] rounded-full pointer-events-none" />
+
         {renderActiveTab()}
       </main>
     </div>

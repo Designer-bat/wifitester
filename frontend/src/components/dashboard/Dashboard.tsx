@@ -1,25 +1,26 @@
 import React from 'react';
 import { useNetworkStore } from '../../store/useNetworkStore';
-import { 
-  TrendingDown, 
-  ArrowUpRight, 
-  ArrowDownRight, 
-  ShieldCheck, 
-  Zap, 
-  Cpu, 
-  Clock, 
-  Activity
+import {
+  TrendingDown,
+  ArrowUpRight,
+  ArrowDownRight,
+  ShieldCheck,
+  Zap,
+  Cpu,
+  Clock,
+  Activity,
+  Wifi
 } from 'lucide-react';
 import { AreaChart, Area, XAxis, YAxis, ResponsiveContainer, Tooltip } from 'recharts';
 
 export const Dashboard: React.FC = () => {
-  const { 
-    connectionStatus, 
-    optimizationMode, 
-    currentPing, 
-    pingHistory, 
-    downloadSpeed, 
-    uploadSpeed, 
+  const {
+    connectionStatus,
+    optimizationMode,
+    currentPing,
+    pingHistory,
+    downloadSpeed,
+    uploadSpeed,
     activeServer,
     switchHistory
   } = useNetworkStore();
@@ -27,13 +28,13 @@ export const Dashboard: React.FC = () => {
   const getStatusConfig = () => {
     switch (connectionStatus) {
       case 'stable':
-        return { label: 'Optimal', color: 'text-emerald-400', bg: 'bg-emerald-500/10', border: 'border-emerald-500/30', glow: 'shadow-[0_0_15px_rgba(16,185,129,0.1)]' };
+        return { label: 'Optimal', color: 'text-status-success', bg: 'bg-status-success/10', border: 'border-status-success/30', glow: 'shadow-sm hover:shadow-md' };
       case 'unstable':
-        return { label: 'Jittery', color: 'text-amber-400', bg: 'bg-amber-500/10', border: 'border-amber-500/30', glow: 'shadow-[0_0_15px_rgba(245,158,11,0.1)]' };
+        return { label: 'Jittery', color: 'text-status-warning', bg: 'bg-status-warning/10', border: 'border-status-warning/30', glow: 'shadow-sm hover:shadow-md' };
       case 'critical':
-        return { label: 'Poor', color: 'text-red-400', bg: 'bg-red-500/10', border: 'border-red-500/30', glow: 'shadow-[0_0_15px_rgba(239,68,68,0.1)]' };
+        return { label: 'Poor', color: 'text-status-error', bg: 'bg-status-error/10', border: 'border-status-error/30', glow: 'shadow-sm hover:shadow-md' };
       case 'optimizing':
-        return { label: 'Optimizing...', color: 'text-cyan-400', bg: 'bg-cyan-500/10', border: 'border-cyan-500/30', glow: 'shadow-[0_0_15px_rgba(6,182,212,0.15)]' };
+        return { label: 'Optimizing...', color: 'text-primary-purple', bg: 'bg-primary-lavender', border: 'border-primary-gradient', glow: 'shadow-sm hover:shadow-md' };
     }
   };
 
@@ -42,16 +43,16 @@ export const Dashboard: React.FC = () => {
   return (
     <div className="flex-1 overflow-y-auto p-8 space-y-6">
       {/* Top Banner Status */}
-      <div className={`p-6 rounded-2xl bg-[#0d1220]/80 border ${statusConfig.border} ${statusConfig.glow} flex items-center justify-between backdrop-blur-md transition-all duration-500`}>
+      <div className={`p-6 rounded-2xl bg-background-card border ${statusConfig.border} ${statusConfig.glow} flex items-center justify-between shadow-sm transition-all duration-500`}>
         <div className="space-y-1">
           <div className="flex items-center gap-3">
-            <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">Connection Status</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">Connection Status</span>
             <div className={`flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold ${statusConfig.bg} ${statusConfig.color} border border-transparent`}>
               <span className={`w-1.5 h-1.5 rounded-full bg-current ${connectionStatus === 'optimizing' ? 'animate-spin' : 'animate-pulse'}`} />
               {statusConfig.label}
             </div>
           </div>
-          <h2 className="text-2xl font-bold text-slate-100 tracking-tight">
+          <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
             {activeServer ? `Connected to ${activeServer.name}` : 'Scanning Optimal Routes...'}
           </h2>
         </div>
@@ -59,10 +60,10 @@ export const Dashboard: React.FC = () => {
         <div className="flex items-center gap-4">
           <div className="text-right">
             <span className="text-xs text-slate-500 font-medium block">Active Mode</span>
-            <span className="text-sm font-semibold text-cyan-400 uppercase tracking-wider font-mono">{optimizationMode} Mode</span>
+            <span className="text-sm font-semibold text-primary-purple uppercase tracking-wider font-mono">{optimizationMode} Mode</span>
           </div>
-          <div className="p-3 bg-cyan-500/10 border border-cyan-500/20 rounded-xl">
-            <Zap className="w-6 h-6 text-cyan-400" />
+          <div className="p-3 bg-primary-lavender border border-primary-gradient rounded-xl">
+            <Zap className="w-6 h-6 text-primary-purple" />
           </div>
         </div>
       </div>
@@ -70,21 +71,21 @@ export const Dashboard: React.FC = () => {
       {/* Primary KPI Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Latency Card */}
-        <div className="bg-[#0d1220]/50 border border-[#1e293b] rounded-2xl p-6 relative overflow-hidden group hover:border-cyan-500/30 transition-all duration-300">
+        <div className="bg-background-card border border-slate-200 rounded-2xl p-6 relative overflow-hidden group hover:border-primary-gradient hover:shadow-md transition-all duration-300">
           <div className="flex items-start justify-between">
             <div className="space-y-1">
               <span className="text-xs font-medium text-slate-500 uppercase">Ping Latency</span>
               <div className="flex items-baseline gap-2">
-                <span className="text-4xl font-extrabold tracking-tight text-cyan-400 font-mono">{currentPing}</span>
-                <span className="text-sm font-semibold text-slate-400">ms</span>
+                <span className="text-4xl font-extrabold tracking-tight text-primary-purple font-mono">{currentPing}</span>
+                <span className="text-sm font-semibold text-slate-500">ms</span>
               </div>
             </div>
-            <div className="p-3 bg-cyan-500/10 rounded-xl">
-              <TrendingDown className="w-5 h-5 text-cyan-400" />
+            <div className="p-3 bg-primary-lavender rounded-xl">
+              <TrendingDown className="w-5 h-5 text-primary-purple" />
             </div>
           </div>
-          <div className="mt-4 flex items-center gap-1.5 text-xs text-slate-400">
-            <span className="text-emerald-400 font-semibold flex items-center gap-0.5">
+          <div className="mt-4 flex items-center gap-1.5 text-xs text-slate-600">
+            <span className="text-status-success font-semibold flex items-center gap-0.5">
               <Zap className="w-3.5 h-3.5" /> Stable
             </span>
             <span>Jitter: ~2ms</span>
@@ -92,56 +93,56 @@ export const Dashboard: React.FC = () => {
         </div>
 
         {/* Download Speed Card */}
-        <div className="bg-[#0d1220]/50 border border-[#1e293b] rounded-2xl p-6 relative overflow-hidden group hover:border-[#a855f7]/30 transition-all duration-300">
+        <div className="bg-background-card border border-slate-200 rounded-2xl p-6 relative overflow-hidden group hover:border-primary-gradient hover:shadow-md transition-all duration-300">
           <div className="flex items-start justify-between">
             <div className="space-y-1">
               <span className="text-xs font-medium text-slate-500 uppercase">Download Speed</span>
               <div className="flex items-baseline gap-2">
-                <span className="text-4xl font-extrabold tracking-tight text-purple-400 font-mono">{downloadSpeed}</span>
-                <span className="text-sm font-semibold text-slate-400">Mbps</span>
+                <span className="text-4xl font-extrabold tracking-tight text-primary-purple font-mono">{downloadSpeed}</span>
+                <span className="text-sm font-semibold text-slate-500">Mbps</span>
               </div>
             </div>
-            <div className="p-3 bg-purple-500/10 rounded-xl">
-              <ArrowDownRight className="w-5 h-5 text-purple-400" />
+            <div className="p-3 bg-primary-lavender rounded-xl">
+              <ArrowDownRight className="w-5 h-5 text-primary-purple" />
             </div>
           </div>
-          <div className="mt-4 flex items-center gap-1.5 text-xs text-slate-400">
-            <span className="text-purple-400 font-semibold">100% capacity</span>
+          <div className="mt-4 flex items-center gap-1.5 text-xs text-slate-600">
+            <span className="text-primary-purple font-semibold">100% capacity</span>
             <span>Buffered: 0ms</span>
           </div>
         </div>
 
         {/* Upload Speed Card */}
-        <div className="bg-[#0d1220]/50 border border-[#1e293b] rounded-2xl p-6 relative overflow-hidden group hover:border-emerald-500/30 transition-all duration-300">
+        <div className="bg-background-card border border-slate-200 rounded-2xl p-6 relative overflow-hidden group hover:border-primary-gradient hover:shadow-md transition-all duration-300">
           <div className="flex items-start justify-between">
             <div className="space-y-1">
               <span className="text-xs font-medium text-slate-500 uppercase">Upload Speed</span>
               <div className="flex items-baseline gap-2">
-                <span className="text-4xl font-extrabold tracking-tight text-emerald-400 font-mono">{uploadSpeed}</span>
-                <span className="text-sm font-semibold text-slate-400">Mbps</span>
+                <span className="text-4xl font-extrabold tracking-tight text-primary-purple font-mono">{uploadSpeed}</span>
+                <span className="text-sm font-semibold text-slate-500">Mbps</span>
               </div>
             </div>
-            <div className="p-3 bg-emerald-500/10 rounded-xl">
-              <ArrowUpRight className="w-5 h-5 text-emerald-400" />
+            <div className="p-3 bg-primary-lavender rounded-xl">
+              <ArrowUpRight className="w-5 h-5 text-primary-purple" />
             </div>
           </div>
-          <div className="mt-4 flex items-center gap-1.5 text-xs text-slate-400">
-            <span className="text-emerald-400 font-semibold">Broadcasting</span>
+          <div className="mt-4 flex items-center gap-1.5 text-xs text-slate-600">
+            <span className="text-status-success font-semibold">Broadcasting</span>
             <span>Stable upload link</span>
           </div>
         </div>
       </div>
 
       {/* Latency History Chart */}
-      <div className="bg-[#0d1220]/30 border border-[#1e293b] rounded-2xl p-6 space-y-4">
+      <div className="bg-background-card border border-slate-200 rounded-2xl p-6 space-y-4 shadow-sm">
         <div className="flex items-center justify-between">
           <div className="space-y-1">
-            <h3 className="text-base font-semibold text-slate-200">Real-time Latency Monitor</h3>
+            <h3 className="text-base font-semibold text-slate-900">Real-time Latency Monitor</h3>
             <p className="text-xs text-slate-500">Live ping trend over the last 30 seconds</p>
           </div>
-          <div className="flex items-center gap-2 text-xs bg-[#0d1220]/50 border border-[#1e293b] px-3 py-1.5 rounded-lg">
-            <Activity className="w-4 h-4 text-cyan-400" />
-            <span className="text-slate-400 font-medium">Auto-updating (2s)</span>
+          <div className="flex items-center gap-2 text-xs bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-lg">
+            <Activity className="w-4 h-4 text-primary-purple" />
+            <span className="text-slate-600 font-medium">Auto-updating (2s)</span>
           </div>
         </div>
 
@@ -150,37 +151,37 @@ export const Dashboard: React.FC = () => {
             <AreaChart data={pingHistory} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
               <defs>
                 <linearGradient id="colorPing" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#06b6d4" stopOpacity={0.2}/>
-                  <stop offset="95%" stopColor="#06b6d4" stopOpacity={0}/>
+                  <stop offset="5%" stopColor="#7B2CBF" stopOpacity={0.15}/>
+                  <stop offset="95%" stopColor="#7B2CBF" stopOpacity={0}/>
                 </linearGradient>
               </defs>
-              <XAxis 
-                dataKey="time" 
-                stroke="#475569" 
-                fontSize={10} 
-                tickLine={false} 
+              <XAxis
+                dataKey="time"
+                stroke="#cbd5e1"
+                fontSize={10}
+                tickLine={false}
                 axisLine={false}
               />
-              <YAxis 
-                stroke="#475569" 
-                fontSize={10} 
-                tickLine={false} 
+              <YAxis
+                stroke="#cbd5e1"
+                fontSize={10}
+                tickLine={false}
                 axisLine={false}
                 domain={['auto', 'auto']}
               />
               <Tooltip
-                contentStyle={{ backgroundColor: '#0d1220', borderColor: '#1e293b', borderRadius: '12px' }}
-                labelStyle={{ color: '#94a3b8', fontSize: '11px', fontWeight: 'bold' }}
-                itemStyle={{ color: '#06b6d4', fontSize: '13px', fontFamily: 'monospace' }}
+                contentStyle={{ backgroundColor: '#FFFFFF', borderColor: '#e2e8f0', borderRadius: '12px' }}
+                labelStyle={{ color: '#64748b', fontSize: '11px', fontWeight: 'bold' }}
+                itemStyle={{ color: '#7B2CBF', fontSize: '13px', fontFamily: 'monospace' }}
               />
-              <Area 
-                type="monotone" 
-                dataKey="ping" 
+              <Area
+                type="monotone"
+                dataKey="ping"
                 name="Latency (ms)"
-                stroke="#06b6d4" 
+                stroke="#7B2CBF"
                 strokeWidth={2}
-                fillOpacity={1} 
-                fill="url(#colorPing)" 
+                fillOpacity={1}
+                fill="url(#colorPing)"
               />
             </AreaChart>
           </ResponsiveContainer>
@@ -190,34 +191,34 @@ export const Dashboard: React.FC = () => {
       {/* Split layout: AI Insights & Switch Logs */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Recommendation Engine Panel */}
-        <div className="bg-[#0d1220]/50 border border-[#1e293b] rounded-2xl p-6 space-y-4">
-          <h3 className="text-base font-semibold text-slate-200 flex items-center gap-2">
-            <Cpu className="w-5 h-5 text-cyan-400" />
+        <div className="bg-background-card border border-slate-200 rounded-2xl p-6 space-y-4 shadow-sm">
+          <h3 className="text-base font-semibold text-slate-900 flex items-center gap-2">
+            <Cpu className="w-5 h-5 text-primary-purple" />
             AI Decision Insights
           </h3>
-          <div className="p-4 bg-[#111827]/40 border border-[#1e293b]/70 rounded-xl space-y-3">
+          <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-3">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-emerald-500/10 rounded-lg">
-                <ShieldCheck className="w-5 h-5 text-emerald-400" />
+              <div className="p-2 bg-status-success/10 rounded-lg">
+                <ShieldCheck className="w-5 h-5 text-status-success" />
               </div>
               <div>
-                <h4 className="text-sm font-semibold text-slate-200">99.8% Route Confidence</h4>
-                <p className="text-xs text-slate-500">Current routing displays zero packet loss and low jitter spikes.</p>
+                <h4 className="text-sm font-semibold text-slate-900">99.8% Route Confidence</h4>
+                <p className="text-xs text-slate-600">Current routing displays zero packet loss and low jitter spikes.</p>
               </div>
             </div>
 
-            <hr className="border-[#1e293b]/70" />
+            <hr className="border-slate-200" />
 
             <div className="space-y-1.5">
               <span className="text-[11px] font-semibold text-slate-500 uppercase block">Prediction Matrix</span>
               <div className="grid grid-cols-2 gap-3">
-                <div className="bg-[#0d1220]/50 p-2.5 rounded-lg border border-[#1e293b]/40">
-                  <span className="text-[10px] text-slate-500 font-medium block">Peak Traffic Risk</span>
-                  <span className="text-xs font-semibold text-emerald-400 font-mono">LOW (12%)</span>
+                <div className="bg-background-light p-2.5 rounded-lg border border-slate-200">
+                  <span className="text-[10px] text-slate-600 font-medium block">Peak Traffic Risk</span>
+                  <span className="text-xs font-semibold text-status-success font-mono">LOW (12%)</span>
                 </div>
-                <div className="bg-[#0d1220]/50 p-2.5 rounded-lg border border-[#1e293b]/40">
-                  <span className="text-[10px] text-slate-500 font-medium block">Best Alternative</span>
-                  <span className="text-xs font-semibold text-slate-300 truncate block">Cloudflare NY</span>
+                <div className="bg-background-light p-2.5 rounded-lg border border-slate-200">
+                  <span className="text-[10px] text-slate-600 font-medium block">Best Alternative</span>
+                  <span className="text-xs font-semibold text-slate-800 truncate block">Cloudflare NY</span>
                 </div>
               </div>
             </div>
@@ -225,10 +226,10 @@ export const Dashboard: React.FC = () => {
         </div>
 
         {/* Switch History Logs */}
-        <div className="bg-[#0d1220]/50 border border-[#1e293b] rounded-2xl p-6 space-y-4 flex flex-col justify-between">
+        <div className="bg-background-card border border-slate-200 rounded-2xl p-6 space-y-4 flex flex-col justify-between shadow-sm">
           <div className="space-y-4">
-            <h3 className="text-base font-semibold text-slate-200 flex items-center gap-2">
-              <Clock className="w-5 h-5 text-cyan-400" />
+            <h3 className="text-base font-semibold text-slate-900 flex items-center gap-2">
+              <Clock className="w-5 h-5 text-primary-purple" />
               Recent Optimization Activity
             </h3>
 
@@ -239,16 +240,16 @@ export const Dashboard: React.FC = () => {
                 </div>
               ) : (
                 switchHistory.map((event, idx) => (
-                  <div key={idx} className="flex justify-between items-start text-xs border-b border-[#1e293b]/30 pb-3 last:border-b-0 last:pb-0">
+                  <div key={idx} className="flex justify-between items-start text-xs border-b border-slate-200 pb-3 last:border-b-0 last:pb-0">
                     <div className="space-y-0.5">
                       <span className="text-[10px] text-slate-500 font-mono">{event.timestamp}</span>
-                      <p className="text-slate-300 font-medium">
-                        Switched to <span className="text-slate-200 font-semibold">{event.toServer}</span>
+                      <p className="text-slate-700 font-medium">
+                        Switched to <span className="text-slate-900 font-semibold">{event.toServer}</span>
                       </p>
-                      <span className="text-slate-500 text-[10px] block italic">{event.reason}</span>
+                      <span className="text-slate-600 text-[10px] block italic">{event.reason}</span>
                     </div>
                     <div className="text-right space-y-1">
-                      <span className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded text-[10px] font-semibold font-mono">
+                      <span className="bg-status-success/10 border border-status-success/30 text-status-success px-2 py-0.5 rounded text-[10px] font-semibold font-mono">
                         {event.latencyImprovement}
                       </span>
                     </div>
@@ -262,3 +263,4 @@ export const Dashboard: React.FC = () => {
     </div>
   );
 };
+
